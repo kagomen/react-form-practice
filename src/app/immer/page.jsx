@@ -25,6 +25,7 @@ const Home = () => {
 
   return (
     <div className="my-4 w-[400px] mx-auto">
+      <h2 className='text-center mb-4'>Immer practice</h2>
       <form>
         <label className="block my-4">名前:
           <input type="text" name="name" value={form.name} onChange={handleForm} className="border border-black" />

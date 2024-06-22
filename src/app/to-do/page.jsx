@@ -59,6 +59,7 @@ const Home = () => {
 
   return (
     <div className='w-fit mx-auto my-4'>
+      <h2 className='text-center mb-4'>React Todo practice</h2>
       <form className='inline'>
         <input type="text" name='title' value={title} onChange={handleChangeTitle}
           className='border border-black' />

@@ -7,11 +7,12 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="mt-4 flex flex-col gap-2 text-center">
-      <Link className="underline" href='/react-form/state-form'>React State Form practice</Link >
-      <Link className="underline" href='/react-form/ref-form'>React Ref Form practice</Link >
-      <Link className="underline" href='/immer'>Immer practice</Link >
-      <Link className="underline" href='/to-do'>React TodoList practice</Link >
-      <Link className="underline" href='/react-hook-form'>react-hook-form practice</Link >
+      <h2 className='text-center mb-4 font-bold'>Practices</h2>
+      <Link className="underline" href='/react-form/state-form'>React useState Form</Link >
+      <Link className="underline" href='/react-form/ref-form'>React useRef Form</Link >
+      <Link className="underline" href='/immer'>Immer</Link >
+      <Link className="underline" href='/to-do'>React TodoList</Link >
+      <Link className="underline" href='/react-hook-form'>react-hook-form</Link >
     </main>
   );
 }
