@@ -13,6 +13,7 @@ export default function Home() {
       <Link className="underline" href='/immer'>Immer</Link >
       <Link className="underline" href='/to-do'>React TodoList</Link >
       <Link className="underline" href='/react-hook-form'>react-hook-form</Link >
+      <Link className="underline" href='/resend'>Resend</Link >
     </main>
   );
 }
