@@ -6,6 +6,35 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 const Home = () => {
 
+  const jpLocale = {
+    mixed: {
+      required: (param) => `${param.label}の入力は必須です`,
+    },
+    string: {
+      min: (param) => `${param.label}は${param.min}文字以上で入力してください`,
+      max: (param) => `${param.label}は${param.max}文字以下で入力してください`,
+      email: 'メールアドレスの形式が不正です',
+    },
+  }
+
+  yup.setLocale(jpLocale)
+
+  yup.addMethod(yup.string, 'ng', function () {  // addMethod(データ型, 検証名, 検証ルール)  ※ thisを使用するのでアロー関数は不可
+    return this.test(
+      'ng',
+      ({ label }) => `${label}にNGワードが含まれています`,
+      value => {
+        const ngs = ['暴力', '自殺']
+        for (const ng of ngs) {
+          if (value.includes(ng)) {
+            return false
+          }
+        }
+        return true
+      }
+    )
+  })
+
   const schema = yup.object({
     name: yup
       .string()
@@ -13,35 +42,23 @@ const Home = () => {
       .trim()  // 前後の空白を除去
       .lowercase()  // 小文字に変換
       .transform((value, orgValue) => value.normalize('NFKC'))  // value: ここまでの変換済みの入力値, orgValue: 下の入力値
-      .required('${label}は必須入力です')
-      .max(6, '${label}は${max}文字以内で入力してください'),
+      .required()
+      .max(6),
     gender: yup
       .string()
       .label('性別')
-      .required('${label}は必須入力です'),
+      .required(),
     email: yup
       .string()
       .label('メールアドレス')
-      .required('${label}は必須入力です')
-      .email('${label}の形式が不正です'),
+      .required()
+      .email(),
     memo: yup
       .string()
       .label('備考')
-      .required('${label}は必須入力です')
-      .test(  // test(検証名, 検証メッセージ, 検証ルール)
-        'ng',
-        ({ label }) => `${label}にNGワードが含まれています`,
-        value => {
-          const ngs = ['暴力', '自殺']
-          for (const ng of ngs) {
-            if (value.includes(ng)) {
-              return false
-            }
-          }
-          return true
-        }
-      )
-      .min(10, '${label}は${min}文字以上で入力してください')
+      .required()
+      .ng()
+      .min(10)
   })
 
   const { register, handleSubmit, formState: { errors, isValid, isSubmitting, isSubmitted } } = useForm({ resolver: yupResolver(schema), mode: 'onChange' })
@@ -60,7 +77,7 @@ const Home = () => {
 
   return (
     <div className="w-fit mx-auto my-4">
-      <h2 className="mb-4 text-center">React Hook Form with Yup</h2>
+      <h2 className="mb-4 text-center">React Hook Form with advanced Yup</h2>
       <form onSubmit={handleSubmit(onsubmit, onerror)} noValidate>
         <label>名前:
           <input type="text" {...register('name')}
