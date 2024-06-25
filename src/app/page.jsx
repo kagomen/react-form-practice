@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-dvh">
       <Header />
-      <main className="w-fit mt-12 mx-auto flex flex-col gap-4">
+      <main className="transition duration-500 w-fit mt-12 mx-auto flex flex-col gap-4">
         <Link className="underline" href='/react-form/state-form'>React useState Form</Link >
         <Link className="underline" href='/react-form/ref-form'>React useRef Form</Link >
         <Link className="underline" href='/immer'>Immer</Link >
