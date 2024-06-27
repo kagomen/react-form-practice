@@ -95,3 +95,7 @@ array.forEach((item, index) => {
 - アルファベットの小文字と大文字は区別した方が良いのか？
 
 > Google 検索では、英語の大文字と小文字は区別されません。検索語句は大文字で入力しても、すべて小文字として認識されます。
+
+## Resend
+
+- 参考: https://zenn.dev/keitakn/scraps/0e1f006459d407

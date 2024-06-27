@@ -7,8 +7,13 @@ import { formSchema } from "./schema"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { sendEmail } from "./action"
+import { useToast } from "@/components/ui/use-toast"
+import { Toaster } from "@/components/ui/toaster"
 
 const Home = () => {
+
+  const { toast } = useToast()
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -19,8 +24,9 @@ const Home = () => {
     }
   })
 
-  function onSubmit(data) {
-    console.log(data)
+  async function onSubmit(data) {
+    await sendEmail(data)
+    toast({ title: 'メッセージを送信しました！' })
   }
 
   return (
@@ -69,9 +75,10 @@ const Home = () => {
             )}
           />
 
-          <Button className="w-full">送信</Button>
+          <Button className="w-full" disabled={form.formState.isSubmitting}>送信</Button>
         </form>
       </Form>
+      <Toaster />
     </div >
   )
 }

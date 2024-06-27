@@ -15,9 +15,9 @@ export async function sendEmail(data) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   const { error } = await resend.emails.send({
-    from: process.env.MY_EMAIL_ADDRESS,
-    to: ['mejej50073@gawte.com'],
-    subject: 'Hello world',
+    from: `kagome<${process.env.MY_EMAIL_ADDRESS}>`,
+    to: [data.email],
+    subject: 'Hello world!',
     react: EmailTemplate(data),  // リッチメール
     text: `hello! ${data.name}!`  // プレーンテキスト
   });
